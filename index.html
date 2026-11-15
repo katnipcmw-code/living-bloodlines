@@ -177,7 +177,7 @@ const relationships=[
 ];
 let people=structuredClone(initial);
 let selectedHouse='targaryen';
-function belongs(p){if(selectedHouse==='all')return true;if(selectedHouse==='lannister')return p.house==='Lannister'||['joffrey','myrcella','tommen','margaery','trystane'].includes(p.id);if(selectedHouse==='stark')return p.house.includes('Stark')||p.house==='Tully';if(selectedHouse==='greyjoy')return ['balon_greyjoy','alannys_harlaw','euron_greyjoy','victarion_greyjoy','asha_greyjoy','theon_greyjoy','eddard','robb','bran','rickon'].includes(p.id);if(selectedHouse==='tully')return ['hoster','minisa','brynden','catelyn','lysa_arryn','edmure','roslin','eddard','jon_arryn','robb','sansa','arya','bran','rickon','robin_arryn'].includes(p.id);if(selectedHouse==='arryn')return ['jon_arryn','lysa_arryn','robin_arryn','yohn_royce'].includes(p.id);if(selectedHouse==='martell')return ['Martell','Sand','Norvos'].includes(p.house)||['trystane','myrcella','rhaegar','rhaenys_elia','aegon_elia'].includes(p.id);if(selectedHouse==='tyrell')return p.house==='Tyrell'||p.house==='Hightower'||['joffrey','tommen','renly'].includes(p.id);if(selectedHouse==='baratheon')return p.house==='Baratheon'||p.house==='Florent'||['cersei','joffrey','myrcella','tommen'].includes(p.id);return p.house.includes('Targaryen')||['elia','lyanna'].includes(p.id)}
+function belongs(p){if(selectedHouse==='all')return true;if(selectedHouse==='lannister')return p.house==='Lannister'||['joffrey','myrcella','tommen','margaery','trystane'].includes(p.id);if(selectedHouse==='stark')return p.house.includes('Stark')||['catelyn','rhaegar'].includes(p.id);if(selectedHouse==='greyjoy')return ['balon_greyjoy','alannys_harlaw','euron_greyjoy','victarion_greyjoy','asha_greyjoy','theon_greyjoy','eddard','robb','bran','rickon'].includes(p.id);if(selectedHouse==='tully')return ['hoster','minisa','brynden','catelyn','lysa_arryn','edmure','roslin','eddard','jon_arryn','robb','sansa','arya','bran','rickon','robin_arryn'].includes(p.id);if(selectedHouse==='arryn')return ['jon_arryn','lysa_arryn','robin_arryn','yohn_royce'].includes(p.id);if(selectedHouse==='martell')return ['Martell','Sand','Norvos'].includes(p.house)||['trystane','myrcella','rhaegar','rhaenys_elia','aegon_elia'].includes(p.id);if(selectedHouse==='tyrell')return p.house==='Tyrell'||p.house==='Hightower'||['joffrey','tommen','renly'].includes(p.id);if(selectedHouse==='baratheon')return p.house==='Baratheon'||p.house==='Florent'||['cersei','joffrey','myrcella','tommen'].includes(p.id);return p.house.includes('Targaryen')||['elia','lyanna'].includes(p.id)}
 function visiblePeople(){
  const selected=people.filter(belongs);
  if(selectedHouse==='targaryen'){
@@ -188,6 +188,16 @@ function visiblePeople(){
    viserys:[710,470],rhaegar:[1140,470],elia:[1380,470],lyanna:[1640,470],
    dany:[770,900],jon:[1170,900],rhaenys_elia:[1480,900],aegon_elia:[1720,900],
    heir1:[770,1370],heir2:[1040,1370],heir3:[1310,1370]
+  };
+  return selected.map(p=>layout[p.id]?{...p,x:layout[p.id][0],y:layout[p.id][1]}:p);
+ }
+  if(selectedHouse==='stark'){
+  // Keep Winterfell relatives together; other Tully family members remain in Riverrun.
+  // House-specific display positions do not alter shared people or relationships.
+  const layout={
+   rickard:[1180,80],lyarra:[1420,80],
+   lyanna:[650,460],brandon:[940,460],eddard:[1240,460],catelyn:[1480,460],benjen:[1780,460],rhaegar:[390,460],
+   jon:[510,900],robb:[1030,900],sansa:[1270,900],arya:[1510,900],bran:[1150,1320],rickon:[1390,1320]
   };
   return selected.map(p=>layout[p.id]?{...p,x:layout[p.id][0],y:layout[p.id][1]}:p);
  }
