@@ -253,9 +253,10 @@ function updateBranchCaptions(h){
  arryn:['✦ THE FALCONS OF THE VALE ✦','✦ THE LORDS OF THE EYRIE ✦','✦ THE NEXT GENERATION ✦'],
  martell:['✦ THE SUNSPEARS OF DORNE ✦','✦ THE PRINCES OF DORNE ✦','✦ THE SAND SNAKES ✦'],
  tyrell:['✦ THE ROSES OF HIGHGARDEN ✦','✦ THE CHILDREN OF MACE ✦','✦ THE QUEEN OF THORNS ✦'],
+ mormont:['✦ THE BEARS OF BEAR ISLAND ✦','✦ THE CHILDREN OF THE SHE-BEAR ✦','✦ HERE WE STAND ✦'],
  all:['✦ THE GREAT HOUSES ✦','✦ CROWNS & BLOODLINES ✦','✦ THE NEXT GENERATION ✦']
  };
- document.querySelectorAll('.world .branch').forEach((el,i)=>{el.textContent=labels[h][i]||'';});
+ document.querySelectorAll('.world .branch').forEach((el,i)=>{el.textContent=(labels[h]||labels.all)[i]||'';});
 }
 function chooseHouse(h){selectedHouse=h;updateBranchCaptions(h);$('miniStatus').textContent='✦ Exploring '+({targaryen:'the reigning royals',stark:'House Stark',lannister:'House Lannister',baratheon:'House Baratheon',tyrell:'House Tyrell',martell:'House Martell',arryn:'House Arryn',tully:'House Tully',greyjoy:'House Greyjoy',mormont:'House Mormont',all:'all Great Houses'}[h]);active=null;navTarget=null;close();document.querySelectorAll('[data-house]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.house===h)));const intros={targaryen:'Fire and Blood · The Dragon and the Wolf',stark:'Winter Is Coming · The Wolves of Winterfell',lannister:'Hear Me Roar! · The Lions of Casterly Rock',baratheon:'Ours Is the Fury · The Crowned Stags of Storm’s End',tyrell:'Growing Strong · The Roses of Highgarden',martell:'Unbowed, Unbent, Unbroken · The Sunspears of Dorne',arryn:'As High as Honor · The Falcons of the Vale',tully:'Family, Duty, Honor · The Rivers of Riverrun',greyjoy:'We Do Not Sow · The Kraken of Pyke',mormont:'Here We Stand · The Bears of Bear Island',all:'The Great Houses · Connected through blood and marriage'};document.getElementById('houseIntro').textContent=intros[h];$('focusNote').textContent='✦ Explore the selected house, or choose All Houses to see every recorded branch.';draw();fitHouse()}
 
